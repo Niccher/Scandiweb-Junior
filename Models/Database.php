@@ -1,7 +1,7 @@
 <?php
 
-class ClassDB
-{
+class Database{
+
     protected  $connection = null;
 
     public function __construct(){
@@ -16,6 +16,4 @@ class ClassDB
         }
 
     }
-
-
 }

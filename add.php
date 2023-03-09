@@ -31,19 +31,22 @@
                         <div class="row mb-3">
                             <label for="sku" class="col-sm-2 col-form-label">SKU</label>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" id="sku">
+                                <input type="text" class="form-control" id="sku" required minlength="5">
+                                <div id="err_sku" class="text-danger text-end small"></div>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="name" class="col-sm-2 col-form-label">Name</label>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" id="name" required>
+                                <input type="text" class="form-control" id="name" required minlength="5">
+                                <div id="err_name" class="text-danger text-end small"></div>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="price" class="col-sm-2 col-form-label">Price</label>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" id="price" required>
+                                <input type="text" class="form-control" id="price" required minlength="1">
+                                <div id="err_price" class="text-danger text-end small"></div>
                             </div>
                         </div>
 
@@ -56,15 +59,17 @@
                                     <option value="Book" id="Book">Book</option>
                                     <option value="Furniture" id="Furniture">Furniture</option>
                                 </select>
+                                <div id="err_productType" class="text-danger text-sm-end small"></div>
                             </div>
                         </div>
 
                         <div class="card class-dvd d-none col-sm-8">
                             <label class="my-2">DVD Information</label>
                             <div class="row mb-3">
-                                <label for="size" class="col-sm-3 col-form-label">Size</label>
+                                <label for="size" class="col-sm-3 col-form-label">Size (MB)</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="size" placeholder="Disk Size in MB">
+                                    <input type="text" class="form-control" id="size" placeholder="Disk Size">
+                                    <div id="err_size" class="text-danger text-end small"></div>
                                 </div>
                             </div>
                         </div>
@@ -72,9 +77,10 @@
                         <div class="card class-book d-none col-sm-8">
                             <label class="my-2">Book Information</label>
                             <div class="row mb-3">
-                                <label for="weight" class="col-sm-3 col-form-label">Weight</label>
+                                <label for="weight" class="col-sm-3 col-form-label">Weight (KG)</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="weight" placeholder="Book weight in Kilograms">
+                                    <input type="text" class="form-control" id="weight" placeholder="Book weight">
+                                    <div id="err_weight" class="text-danger text-end small"></div>
                                 </div>
                             </div>
                         </div>
@@ -82,21 +88,24 @@
                         <div class="card class-furniture d-none col-sm-8">
                             <label class="my-2">Furniture Information</label>
                             <div class="row mb-3">
-                                <label for="length" class="col-sm-3 col-form-label">Furniture</label>
+                                <label for="length" class="col-sm-3 col-form-label">Length (CM)</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="length" placeholder="Furniture length in Centimeters">
+                                    <input type="text" class="form-control" id="length" placeholder="Furniture length">
+                                    <div id="err_height" class="text-danger text-end small"></div>
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="width" class="col-sm-3 col-form-label">Furniture</label>
+                                <label for="width" class="col-sm-3 col-form-label">Width (CM)</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="width" placeholder="Furniture width in Centimeters">
+                                    <input type="text" class="form-control" id="width" placeholder="Furniture width">
+                                    <div id="err_width" class="text-danger text-end small"></div>
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="height" class="col-sm-3 col-form-label">Furniture</label>
+                                <label for="height" class="col-sm-3 col-form-label">Height (CM)</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="height" placeholder="Furniture height in Centimeters">
+                                    <input type="text" class="form-control" id="height" placeholder="Furniture height">
+                                    <div id="err_height" class="text-danger text-end small"></div>
                                 </div>
                             </div>
                         </div>
@@ -117,30 +126,36 @@
         </div>
         <script src="./js/bootstrap.bundle.min.js"></script>
         <script src="./js/jquery3.6.4.js"></script>
+        <script src="./js/validator.js"></script>
 
         <script>
             $(document).ready(function(){
+
                 $("#productType").change(function () {
                     var ui_class = this.value;
-                    console.log("Helo "+ ui_class)
+                    console.log("Hello "+ ui_class)
                     if (ui_class == 'DVD'){
                         $('.class-dvd').removeClass("d-none");
                         $('.class-book').addClass("d-none");
                         $('.class-furniture').addClass("d-none");
-                    }
-                    if (ui_class == 'Book'){
+                    }else if (ui_class == 'Book'){
                         $('.class-dvd').addClass("d-none");
                         $('.class-book').removeClass("d-none");
                         $('.class-furniture').addClass("d-none");
-                    }
-                    if (ui_class == 'Furniture'){
+                    }else if (ui_class == 'Furniture'){
                         $('.class-dvd').addClass("d-none");
                         $('.class-book').addClass("d-none");
                         $('.class-furniture').removeClass("d-none");
                     }
+                    else {
+                        $('.class-dvd').addClass("d-none");
+                        $('.class-book').addClass("d-none");
+                        $('.class-furniture').addClass("d-none");
+                    }
                 });
 
                 $('.class_product_add').click(function () {
+
                     sku = $("#sku").val();
                     name = $("#name").val();
                     price = $("#price").val();
@@ -150,25 +165,14 @@
                     console.log('Name as '+ name)
                     console.log('Price as '+ price)
                     console.log('Cat as '+ cat)
-
-                   /* $.ajax({
-                        url: '<?php //echo base_url('work/pay'); ?>',
-                        type: 'POST',
-                        data: { product_name: sku, product_name: name, product_price: price },
-                        success: function(response){
-                            if(response == 1){
-                                alert('Work Marked as complete.');
-                            }else{
-                                alert('An Error occurred.');
-                            }
-                        }
-                    });*/
                 });
+
             });
 
             function pageListing() {
                 window.location.href = "listing.php";
             }
+
         </script>
 
     </body>
