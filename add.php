@@ -31,14 +31,14 @@
                         <div class="row mb-3">
                             <label for="sku" class="col-sm-2 col-form-label">SKU</label>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" id="sku" required minlength="5">
+                                <input type="text" class="form-control" id="sku" required minlength="3">
                                 <div id="err_sku" class="text-danger text-end small"></div>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="name" class="col-sm-2 col-form-label">Name</label>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" id="name" required minlength="5">
+                                <input type="text" class="form-control" id="name" required minlength="3">
                                 <div id="err_name" class="text-danger text-end small"></div>
                             </div>
                         </div>
@@ -91,7 +91,7 @@
                                 <label for="length" class="col-sm-3 col-form-label">Length (CM)</label>
                                 <div class="col-sm-6">
                                     <input type="text" class="form-control" id="length" placeholder="Furniture length">
-                                    <div id="err_height" class="text-danger text-end small"></div>
+                                    <div id="err_length" class="text-danger text-end small"></div>
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -152,6 +152,17 @@
                         $('.class-book').addClass("d-none");
                         $('.class-furniture').addClass("d-none");
                     }
+
+                    $("#weight" ).val('');
+                    $("#size" ).val('');
+                    $("#length" ).val('');
+                    $("#width" ).val('');
+                    $("#height" ).val('');
+
+                    $("#err_size").html("");
+                    $("#err_weight").html("");
+                    $("#err_height").html("");
+
                 });
 
                 $('.class_product_add').click(function () {
