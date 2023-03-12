@@ -6,9 +6,9 @@
     require_once PROJECT_ROOT_PATH . "/inc/config.php";
 
     // get main controller
-    require_once PROJECT_ROOT_PATH . "/Controller/Api/BaseController.php";
+    require_once PROJECT_ROOT_PATH . "/ControllerS/BaseController.php";
 
     // get DBInteract model_file
-    require_once PROJECT_ROOT_PATH . "/Model/UserModel.php";
+    require_once PROJECT_ROOT_PATH . "/Models/DBInteract.php";
 
 ?>

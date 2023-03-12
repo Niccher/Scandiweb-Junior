@@ -161,20 +161,55 @@ $(document).ready(function () {
         }else if (!validateCategory()){
             $("#productType").focus();
         }else if(validateSubCategory()){
+
+            let val_category = $( "#productType" ).val();
+
+            let val_book_weight = $( "#weight" ).val();
+            let val_dvd_size = $( "#size" ).val();
+            let val_furn_length = $( "#length" ).val();
+            let val_furn_width = $( "#width" ).val();
+            let val_furn_height = $( "#height" ).val();
+            let val_product_attrib = {};
+
+            if (val_category == "DVD") {
+                val_product_attrib = {
+                    product_type: "DVD",
+                    product_size: val_dvd_size,
+                }
+            }
+            if (val_category == "Book") {
+                val_product_attrib = {
+                    product_type: "Book",
+                    product_weight: val_book_weight,
+                }
+            }
+            if (val_category == "Furniture") {
+                val_product_attrib = {
+                    product_type: "Furniture",
+                    product_length: val_furn_length,
+                    product_width: val_furn_width,
+                    product_height: val_furn_height,
+                }
+            }
+
             sku = $("#sku").val();
             name = $("#name").val();
             price = $("#price").val();
             cat = $( "#productType" ).val();
+
+            product_data = {product_sku: sku, product_name: name, product_price: price}
+            product_info = Object.assign({}, product_data, val_product_attrib);
+
             $.ajax({
                 url: './../Controllers/Base.php',
                 type: 'POST',
-                data: { prod_sku: sku, prod_name: name, prod_price: price, prod_cat: cat },
+                data: { product_info },
                 success: function(response){
-                    if(response == 1){
-                        alert('Work Marked as complete.');
+                    /*if(response == 1){
+                        window.alert('Work Marked as complete.');
                     }else{
-                        alert('An Error occurred.');
-                    }
+                        window.alert('An Error occurred.');
+                    }*/
                 }
             });
         }
