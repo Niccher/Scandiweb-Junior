@@ -160,13 +160,25 @@ $(document).ready(function () {
             $("#price").focus();
         }else if (!validateCategory()){
             $("#productType").focus();
+        }else if(validateSubCategory()){
+            sku = $("#sku").val();
+            name = $("#name").val();
+            price = $("#price").val();
+            cat = $( "#productType" ).val();
+            $.ajax({
+                url: './../Controllers/Base.php',
+                type: 'POST',
+                data: { prod_sku: sku, prod_name: name, prod_price: price, prod_cat: cat },
+                success: function(response){
+                    if(response == 1){
+                        alert('Work Marked as complete.');
+                    }else{
+                        alert('An Error occurred.');
+                    }
+                }
+            });
         }
 
-        if (!validateSubCategory()){
-            console.log('Error a variable is missing')
-        }else{
-            window.alert('Good to submit')
-        }
     });
 
 });

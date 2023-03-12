@@ -31,21 +31,21 @@
                         <div class="row mb-3">
                             <label for="sku" class="col-sm-2 col-form-label">SKU</label>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" id="sku" required minlength="3">
+                                <input type="text" class="form-control" id="sku" required minlength="3" placeholder="Enter Product SKU here">
                                 <div id="err_sku" class="text-danger text-end small"></div>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="name" class="col-sm-2 col-form-label">Name</label>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" id="name" required minlength="3">
+                                <input type="text" class="form-control" id="name" required minlength="3" placeholder="Enter Product Name here">
                                 <div id="err_name" class="text-danger text-end small"></div>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="price" class="col-sm-2 col-form-label">Price</label>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" id="price" required minlength="1">
+                                <input type="text" class="form-control" id="price" required minlength="1" placeholder="Enter Product Price here (Numbers only)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
                                 <div id="err_price" class="text-danger text-end small"></div>
                             </div>
                         </div>
@@ -68,7 +68,7 @@
                             <div class="row mb-3">
                                 <label for="size" class="col-sm-3 col-form-label">Size (MB)</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="size" placeholder="Disk Size">
+                                    <input type="text" class="form-control" id="size" placeholder="Disk Size (Numbers only)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
                                     <div id="err_size" class="text-danger text-end small"></div>
                                 </div>
                             </div>
@@ -79,7 +79,7 @@
                             <div class="row mb-3">
                                 <label for="weight" class="col-sm-3 col-form-label">Weight (KG)</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="weight" placeholder="Book weight">
+                                    <input type="text" class="form-control" id="weight" placeholder="Book weight (Numbers only)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
                                     <div id="err_weight" class="text-danger text-end small"></div>
                                 </div>
                             </div>
@@ -90,21 +90,21 @@
                             <div class="row mb-3">
                                 <label for="length" class="col-sm-3 col-form-label">Length (CM)</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="length" placeholder="Furniture length">
+                                    <input type="text" class="form-control" id="length" placeholder="Furniture length (Numbers only)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
                                     <div id="err_length" class="text-danger text-end small"></div>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="width" class="col-sm-3 col-form-label">Width (CM)</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="width" placeholder="Furniture width">
+                                    <input type="text" class="form-control" id="width" placeholder="Furniture width (Numbers only)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
                                     <div id="err_width" class="text-danger text-end small"></div>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="height" class="col-sm-3 col-form-label">Height (CM)</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="height" placeholder="Furniture height">
+                                    <input type="text" class="form-control" id="height" placeholder="Furniture height (Numbers only)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
                                     <div id="err_height" class="text-danger text-end small"></div>
                                 </div>
                             </div>
