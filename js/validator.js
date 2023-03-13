@@ -173,22 +173,17 @@ $(document).ready(function () {
 
             if (val_category == "DVD") {
                 val_product_attrib = {
-                    product_type: "DVD",
-                    product_size: val_dvd_size,
+                    product_attrib: val_dvd_size  + ' MB'
                 }
             }
             if (val_category == "Book") {
                 val_product_attrib = {
-                    product_type: "Book",
-                    product_weight: val_book_weight,
+                    product_attrib: val_book_weight  + ' KG'
                 }
             }
             if (val_category == "Furniture") {
                 val_product_attrib = {
-                    product_type: "Furniture",
-                    product_length: val_furn_length,
-                    product_width: val_furn_width,
-                    product_height: val_furn_height,
+                    product_attrib: val_furn_length + 'x' + val_furn_width + 'x' + val_furn_height
                 }
             }
 
@@ -197,7 +192,7 @@ $(document).ready(function () {
             price = $("#price").val();
             cat = $( "#productType" ).val();
 
-            product_data = {product_sku: sku, product_name: name, product_price: price}
+            product_data = {product_sku: sku, product_name: name, product_price: price, product_type: cat}
             product_info = Object.assign({}, product_data, val_product_attrib);
 
             $.ajax({

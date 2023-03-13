@@ -4,7 +4,10 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
-        <link href="./css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+
+        <link href="./css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     </head>
 
     <body>
@@ -13,10 +16,10 @@
                 <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
                     <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
                         <a href="#" class="ms-2 ">
-                            <div class="btn btn-success class_product_add">Save</div>
+                            <div class="btn btn-success class_product_add"><i class="fas fa-save"></i> &nbsp;Save</div>
                         </a>
 
-                        <div class="btn btn-danger ms-2" onclick="pageListing()">Cancel</div>
+                        <div class="btn btn-danger ms-2" onclick="pageListing()"><i class="fas fa-window-close"></i> &nbsp;Cancel</div>
 
                         <a href="listing.php" class="ms-2">
                             <div class="btn btn-primary">List Products</div>
@@ -29,21 +32,21 @@
                 <div class="row mb-3 text-center">
                     <form class="col-sm-12" id="product_form">
                         <div class="row mb-3">
-                            <label for="sku" class="col-sm-2 col-form-label">SKU</label>
+                            <label for="sku" class="col-sm-2 col-form-label">SKU &nbsp;<i class="fas fa-tag text-muted"></i></label>
                             <div class="col-sm-6">
                                 <input type="text" class="form-control" id="sku" required minlength="3" placeholder="Enter Product SKU here">
                                 <div id="err_sku" class="text-danger text-end small"></div>
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="name" class="col-sm-2 col-form-label">Name</label>
+                            <label for="name" class="col-sm-2 col-form-label">Name &nbsp;<i class="fas fa-tag text-muted"></i></label>
                             <div class="col-sm-6">
                                 <input type="text" class="form-control" id="name" required minlength="3" placeholder="Enter Product Name here">
                                 <div id="err_name" class="text-danger text-end small"></div>
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="price" class="col-sm-2 col-form-label">Price</label>
+                            <label for="price" class="col-sm-2 col-form-label">Price &nbsp;<i class="fas fa-dollar-sign text-muted"></i></label>
                             <div class="col-sm-6">
                                 <input type="text" class="form-control" id="price" required minlength="1" placeholder="Enter Product Price here (Numbers only)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
                                 <div id="err_price" class="text-danger text-end small"></div>
@@ -66,7 +69,7 @@
                         <div class="card class-dvd d-none col-sm-8">
                             <label class="my-2">DVD Information</label>
                             <div class="row mb-3">
-                                <label for="size" class="col-sm-3 col-form-label">Size (MB)</label>
+                                <label for="size" class="col-sm-3 col-form-label">Size (MB) &nbsp;<i class="fas fa-database text-muted"></i></label>
                                 <div class="col-sm-6">
                                     <input type="text" class="form-control" id="size" placeholder="Disk Size (Numbers only)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
                                     <div id="err_size" class="text-danger text-end small"></div>
@@ -77,7 +80,7 @@
                         <div class="card class-book d-none col-sm-8">
                             <label class="my-2">Book Information</label>
                             <div class="row mb-3">
-                                <label for="weight" class="col-sm-3 col-form-label">Weight (KG)</label>
+                                <label for="weight" class="col-sm-3 col-form-label">Weight (KG)&nbsp;<i class="fas fa-weight-hanging text-muted"></i></label>
                                 <div class="col-sm-6">
                                     <input type="text" class="form-control" id="weight" placeholder="Book weight (Numbers only)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
                                     <div id="err_weight" class="text-danger text-end small"></div>
@@ -88,21 +91,21 @@
                         <div class="card class-furniture d-none col-sm-8">
                             <label class="my-2">Furniture Information</label>
                             <div class="row mb-3">
-                                <label for="length" class="col-sm-3 col-form-label">Length (CM)</label>
+                                <label for="length" class="col-sm-3 col-form-label">Length (CM)&nbsp;<i class="fas fa-ruler-combined text-muted"></i></label>
                                 <div class="col-sm-6">
                                     <input type="text" class="form-control" id="length" placeholder="Furniture length (Numbers only)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
                                     <div id="err_length" class="text-danger text-end small"></div>
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="width" class="col-sm-3 col-form-label">Width (CM)</label>
+                                <label for="width" class="col-sm-3 col-form-label">Width (CM)&nbsp;<i class="fas fa-ruler-combined text-muted"></i></label>
                                 <div class="col-sm-6">
                                     <input type="text" class="form-control" id="width" placeholder="Furniture width (Numbers only)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
                                     <div id="err_width" class="text-danger text-end small"></div>
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="height" class="col-sm-3 col-form-label">Height (CM)</label>
+                                <label for="height" class="col-sm-3 col-form-label">Height (CM) &nbsp;<i class="fas fa-ruler-combined text-muted"></i></label>
                                 <div class="col-sm-6">
                                     <input type="text" class="form-control" id="height" placeholder="Furniture height (Numbers only)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
                                     <div id="err_height" class="text-danger text-end small"></div>
