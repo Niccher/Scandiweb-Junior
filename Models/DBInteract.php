@@ -4,13 +4,18 @@ include "./Database.php";
 
 class DBInteract extends Database {
 
-    public function productList(){
-        $sql = "SELECT * FROM SampleTable";
-        if(mysqli_query($connection , $sql)){
-            echo "No record Fetched.";
+    public function productView(){
+        $sql = "SELECT * FROM `persons` ";
+        $result = mysqli_query($connection , $sql);
+        if($result){
+            echo "records Fetched.";
         } else{
-            echo "Could execute $sql. " . mysqli_error($connection);
+            echo "Could not execute $sql. " . mysqli_error($connection);
         }
+
+        echo ("Data types as ". gettype($connection));
+
+        echo "Could productList";
     }
 
     public function productInsert(){

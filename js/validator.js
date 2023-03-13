@@ -205,11 +205,7 @@ $(document).ready(function () {
                 type: 'POST',
                 data: { product_info },
                 success: function(response){
-                    /*if(response == 1){
-                        window.alert('Work Marked as complete.');
-                    }else{
-                        window.alert('An Error occurred.');
-                    }*/
+                    window.location.replace("./listing.php");
                 }
             });
         }

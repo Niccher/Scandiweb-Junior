@@ -24,32 +24,7 @@
             </header>
 
             <main>
-                <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-                        <?php
-                        $count = 10;
-
-                        for ($i = 0; $i < 10; $i++){ ?>
-
-                        <div class="col-md-3 col-sm-6">
-                            <div class="card mb-3 rounded-3">
-                                <div class="card-body">
-                                    <div class="form-check checkbox-class">
-                                        <input class="form-check-input delete-checkbox" type="checkbox" name="checkbox-delete[]" value="del_<?php echo $i;?>">
-                                    </div>
-                                    <ul class="list-unstyled mt-3 mb-4">
-                                        <li>Product ID</li>
-                                        <li>Product Name</li>
-                                        <li>$12.00</li>
-                                        <li>Product Attribute</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <?php
-                        }
-                        ?>
-
+                <div class="row row-cols-1 row-cols-md-3 mb-3 text-center products_list">
                 </div>
             </main>
 
@@ -73,6 +48,18 @@
             $("#delete-product-btn-apply").click(function(){
                 console.log('Hello Add')
                 $('.checkbox-class').addClass("d-none");
+            });
+
+            $(document).ready(function () {
+                $.ajax({
+                    url: './../Controllers/Base.php',
+                    type: 'POST',
+                    data: { action: "get_products" },
+                    success: function(response){
+                        $('.products_list').html(response);
+                    }
+                });
+
             });
         </script>
 
