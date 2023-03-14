@@ -21,9 +21,6 @@
 
                         <div class="btn btn-danger ms-2" onclick="pageListing()"><i class="fas fa-window-close"></i> &nbsp;Cancel</div>
 
-                        <a href="listing.php" class="ms-2">
-                            <div class="btn btn-primary">List Products</div>
-                        </a>
                     </nav>
                 </div>
             </header>
@@ -48,7 +45,8 @@
                         <div class="row mb-3">
                             <label for="price" class="col-sm-2 col-form-label">Price &nbsp;<i class="fas fa-dollar-sign text-muted"></i></label>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" id="price" required minlength="1" placeholder="Enter Product Price here (Numbers only)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
+                                <!--<input type="text" class="form-control" id="price" required minlength="1" placeholder="Enter Product Price here (Numbers only)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"> -->
+                                <input type="text" class="form-control" id="price" required minlength="1" placeholder="Enter Product Price here (Numbers only)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/[^0-9\.]/g, '')">
                                 <div id="err_price" class="text-danger text-end small"></div>
                             </div>
                         </div>
@@ -71,7 +69,7 @@
                             <div class="row mb-3">
                                 <label for="size" class="col-sm-3 col-form-label">Size (MB) &nbsp;<i class="fas fa-database text-muted"></i></label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="size" placeholder="Disk Size (Numbers only)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
+                                    <input type="text" class="form-control" id="size" placeholder="Disk Size (Numbers only)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/[^0-9\.]/g, '')">
                                     <div id="err_size" class="text-danger text-end small"></div>
                                 </div>
                             </div>
@@ -82,7 +80,7 @@
                             <div class="row mb-3">
                                 <label for="weight" class="col-sm-3 col-form-label">Weight (KG)&nbsp;<i class="fas fa-weight-hanging text-muted"></i></label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="weight" placeholder="Book weight (Numbers only)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
+                                    <input type="text" class="form-control" id="weight" placeholder="Book weight (Numbers only)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/[^0-9\.]/g, '')">
                                     <div id="err_weight" class="text-danger text-end small"></div>
                                 </div>
                             </div>
@@ -93,21 +91,21 @@
                             <div class="row mb-3">
                                 <label for="length" class="col-sm-3 col-form-label">Length (CM)&nbsp;<i class="fas fa-ruler-combined text-muted"></i></label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="length" placeholder="Furniture length (Numbers only)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
+                                    <input type="text" class="form-control" id="length" placeholder="Furniture length (Numbers only)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/[^0-9\.]/g, '')">
                                     <div id="err_length" class="text-danger text-end small"></div>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="width" class="col-sm-3 col-form-label">Width (CM)&nbsp;<i class="fas fa-ruler-combined text-muted"></i></label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="width" placeholder="Furniture width (Numbers only)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
+                                    <input type="text" class="form-control" id="width" placeholder="Furniture width (Numbers only)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/[^0-9\.]/g, '')">
                                     <div id="err_width" class="text-danger text-end small"></div>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="height" class="col-sm-3 col-form-label">Height (CM) &nbsp;<i class="fas fa-ruler-combined text-muted"></i></label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="height" placeholder="Furniture height (Numbers only)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
+                                    <input type="text" class="form-control" id="height" placeholder="Furniture height (Numbers only)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/[^0-9\.]/g, '')">
                                     <div id="err_height" class="text-danger text-end small"></div>
                                 </div>
                             </div>
@@ -136,7 +134,7 @@
 
                 $("#productType").change(function () {
                     var ui_class = this.value;
-                    console.log("Hello "+ ui_class)
+
                     if (ui_class == 'DVD'){
                         $('.class-dvd').removeClass("d-none");
                         $('.class-book').addClass("d-none");
@@ -165,26 +163,12 @@
                     $("#err_size").html("");
                     $("#err_weight").html("");
                     $("#err_height").html("");
-
-                });
-
-                $('.class_product_add').click(function () {
-
-                    sku = $("#sku").val();
-                    name = $("#name").val();
-                    price = $("#price").val();
-                    cat = $( "#productType" ).val();
-
-                    console.log('SKU as '+ sku)
-                    console.log('Name as '+ name)
-                    console.log('Price as '+ price)
-                    console.log('Cat as '+ cat)
                 });
 
             });
 
             function pageListing() {
-                window.location.href = "listing.php";
+                window.location.href = "index.php";
             }
 
         </script>

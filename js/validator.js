@@ -19,12 +19,6 @@ $(document).ready(function () {
     }
 
     function validatePrice() {
-        $('#price').keypress(function (e) {
-            var charCode = (e.which) ? e.which : event.keyCode
-            if (String.fromCharCode(charCode).match(/[^0-9]/g))
-                return false;
-        });
-
         let val_price = $("#price").val();
         let err_price_len = "";
 
@@ -200,7 +194,7 @@ $(document).ready(function () {
                 type: 'POST',
                 data: { product_info },
                 success: function(response){
-                    window.location.replace("./listing.php");
+                    window.location.replace("./index.php");
                 }
             });
         }

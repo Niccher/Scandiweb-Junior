@@ -56,7 +56,7 @@ class Database{
                                 <li><i class="fas fa-tag text-muted"></i>&nbsp;&nbsp;'.$single_product[1].'</li>
                                 <li class="fs-4"><i class="fas fa-tags text-muted"></i>&nbsp;&nbsp;'.$single_product[2].'</li>
                                 <li>'.$single_product[3].'&nbsp;<i class="fas fa-dollar-sign text-muted"></i></li>
-                                <li class="fw-bold">'.$prod_prefix.'&nbsp;&nbsp;'.$single_product[5].'</li>
+                                <li class="fw-bold">'.$prod_prefix.':&nbsp;&nbsp;'.$single_product[5].'</li>
                             </ul>
                         </div>
                     </div>
@@ -70,12 +70,30 @@ class Database{
     }
 
     public function productInsert($prod_sku, $prod_name, $prod_price, $prod_category, $prod_attrib){
-        $sql = "INSERT INTO tbl_Products (prod_sku, prod_name, prod_price, prod_category, product_attrib) VALUES ('".$prod_sku."', '".$prod_name."', '".$prod_price."', '".$prod_category."', '".$prod_attrib."')";
+
+        $str_sku = filter_var($prod_sku, FILTER_SANITIZE_STRING);
+        $str_name = filter_var($prod_name, FILTER_SANITIZE_STRING);
+        $str_price = filter_var($prod_price, FILTER_SANITIZE_STRING);
+        $str_category = filter_var($prod_category, FILTER_SANITIZE_STRING);
+        $str_attrib = filter_var($prod_attrib, FILTER_SANITIZE_STRING);
+
+        $str_values = " '".$str_sku."', '".$str_name."', '".$str_price."', '".$str_category."', '".$str_attrib."' ";
+
+        $sql = "INSERT INTO tbl_Products (prod_sku, prod_name, prod_price, prod_category, product_attrib) VALUES (".$str_values.")";
+
         $result = mysqli_query($this->connection , $sql);
         if($result){
             return true;
         } else{
             return false;
+        }
+    }
+
+    public function productDelete($multiple_skus){
+        foreach ($multiple_skus as $product_sku){
+            $str_sku = filter_var($product_sku, FILTER_SANITIZE_STRING);
+            $sql = "DELETE FROM tbl_Products WHERE prod_sku = '".$str_sku."' ";
+            $result = mysqli_query($this->connection , $sql);
         }
     }
 }
