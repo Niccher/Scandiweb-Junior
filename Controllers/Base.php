@@ -2,20 +2,12 @@
 
 include './../Models/Database.php';
 
-class Base{
-    public function __construct(){
-        $echo = "I'm the constructor for Base controller<br>";
-    }
-}
-
-    $base   = new Base();
-    $db     = new Database();
-
     $request_url=( $_SERVER["HTTP_REFERER"]);
 
     if (basename($request_url) == "index.php" || basename($request_url) == ""){
         if($_POST['action'] == 'get_products'){
             $products = $db->productList();
+            $db->setProducts($products);
             echo  ($products);
         }
         if($_POST['action'] == 'del_products'){
@@ -25,12 +17,9 @@ class Base{
                 $db->setSkuDelete($product_ids);
                 $db->productDelete();
             }
-
         }
     }elseif (basename($request_url) == "addproduct.php"){
-        if (empty($_POST)) {
-            echo "Post values are empty";
-        } else {
+        if (!empty($_POST)) {
             $db->setSku($_POST['product_info']['product_sku']);
             $db->setName($_POST['product_info']['product_name']);
             $db->setPrice($_POST['product_info']['product_price']);

@@ -4,7 +4,7 @@ include_once './../config/config.php';
 
 class Database{
 
-    public $connection = null;
+    private $connection = null;
 
     private $sku ;
     private $name;
@@ -12,72 +12,95 @@ class Database{
     private $category ;
     private $attrib;
     private $sku_delete;
+    public $products;
 
-    public function getSku(){
+    public function getSku()
+    {
         return $this->sku;
     }
 
-    public function setSku($sku){
+    public function setSku($sku)
+    {
         $this->sku = $sku;
     }
 
-    public function getName(){
+    public function getName()
+    {
         return $this->name;
     }
 
-    public function setName($name){
+    public function setName($name)
+    {
         $this->name = $name;
     }
 
-    public function getPrice(){
+    public function getPrice()
+    {
         return $this->price;
     }
 
-    public function setPrice($price){
+    public function setPrice($price)
+    {
         $this->price = $price;
     }
 
-    public function getCategory(){
+    public function getCategory()
+    {
         return $this->category;
     }
 
-    public function setCategory($category){
+    public function setCategory($category)
+    {
         $this->category = $category;
     }
 
-    public function getAttrib(){
+    public function getAttrib()
+    {
         return $this->attrib;
     }
 
-    public function setAttrib($attrib){
+    public function setAttrib($attrib)
+    {
         $this->attrib = $attrib;
     }
 
-    public function getSkuDelete(){
+    public function getSkuDelete()
+    {
         return $this->sku_del;
     }
 
-    public function setSkuDelete($sku_del){
+    public function setSkuDelete($sku_del)
+    {
         $this->sku_del = $sku_del;
     }
 
-    public function __construct(){
-        try {
+    public function getProducts()
+    {
+        return $this->products;
+    }
+
+    public function setProducts($products)
+    {
+        $this->products = $products;
+    }
+
+    public function __construct()
+    {
+        try{
             $this->connection = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_DATABASE_NAME);
             if ( mysqli_connect_errno()) {
                 $err = mysqli_connect_error();
-                echo "Could not connect to database -> $err.<br>";
-            }else{
-                //echo "Connected to database<br>";
+                return "Could not connect to database -> ".$err;
             }
 
-        } catch (Exception $e) {
+        } catch (Exception $e){
             $err = $e->getMessage();
-            echo "Error in connection ".$err.".<br>";
+            return "Error in connection ".$err;
         }
     }
 
-    public function productList(){
+    public function productList()
+    {
         $sql = "SELECT * FROM tbl_Products ORDER BY prod_count DESC";
         $result = mysqli_query($this->connection , $sql);
         if($result){
@@ -130,7 +153,8 @@ class Database{
         }
     }
 
-    public function productInsert(){
+    public function productInsert()
+    {
         $str_sku        = filter_var($this->getSku(), FILTER_SANITIZE_STRING);
         $str_name       = filter_var($this->getName(), FILTER_SANITIZE_STRING);
         $str_price      = filter_var($this->getPrice(), FILTER_SANITIZE_STRING);
@@ -149,7 +173,8 @@ class Database{
         }
     }
 
-    public function productDelete(){
+    public function productDelete()
+    {
         //$multiple_skus = $this->getSkuDelete();
         foreach ($this->getSkuDelete() as $product_sku){
             $str_sku    = filter_var($product_sku, FILTER_SANITIZE_STRING);

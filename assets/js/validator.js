@@ -190,7 +190,7 @@ $(document).ready(function () {
             product_info = Object.assign({}, product_data, val_product_attrib);
 
             $.ajax({
-                url: './../Controllers/Base.php',
+                url: './Controllers/Base.php',
                 type: 'POST',
                 data: { product_info },
                 success: function(response){
