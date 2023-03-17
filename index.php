@@ -12,9 +12,9 @@ include  "./config/header.php"
                         <a href="addproduct.php" class="ms-2">
                             <div class="btn btn-primary"><i class="fas fa-plus"></i> &nbsp;Add</div>
                         </a>
-                        <div class="ms-2 btn btn-warning" id="delete-product-btn">
+                        <button class="ms-2 btn btn-warning" id="delete-product-btn">
                             <i class="fas fa-trash"></i> &nbsp; Mass Delete
-                        </div>
+                        </button>
                         <small class="btn-link btn-sm text-danger fst-italic del_error"></small>
                     </nav>
                 </div>
@@ -80,7 +80,6 @@ include  "./config/header.php"
                     type: 'POST',
                     data: { action: "del_products", prod_ids: product_ids },
                     success: function(response){
-                        console.log(response)
                         getList();
                     }
                 });

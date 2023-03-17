@@ -4,7 +4,7 @@ include_once './../config/config.php';
 
 class Database{
 
-    private $connection = null;
+    private $connection;
 
     private $sku ;
     private $name;
@@ -12,7 +12,7 @@ class Database{
     private $category ;
     private $attrib;
     private $sku_delete;
-    public $products;
+    private $products;
 
     public function getSku()
     {
@@ -119,7 +119,7 @@ class Database{
                 $prod_prefix = "";
                 if($this->getCategory() ==  "DVD"){
                     $prod_icon = "<i class='fas fa-compact-disc text-muted'></i>";
-                    $prod_prefix = "Disk Size";
+                    $prod_prefix = "Size";
                 }else if($this->getCategory() ==  "Book"){
                     $prod_icon = "<i class='fas fa-book text-muted'></i>";
                     $prod_prefix = "Weight";
@@ -181,6 +181,22 @@ class Database{
             $sql        = "DELETE FROM tbl_Products WHERE prod_sku = '".$str_sku."' ";
             $result     = mysqli_query($this->connection , $sql);
         }
+    }
+
+    public function checkSku()
+    {
+        $str_sku        = filter_var($this->getSku(), FILTER_SANITIZE_STRING);
+        $str_values     = " '".$str_sku."' ";
+
+        $sql            = "SELECT * FROM tbl_Products WHERE prod_sku = ".$str_values." ";
+        $result         = mysqli_query($this->connection , $sql);
+
+        if ($result->num_rows > 0) {
+            return false;
+        } else {
+            return true;
+        }
+
     }
 }
 

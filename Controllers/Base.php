@@ -19,15 +19,19 @@ include './../Models/Database.php';
             }
         }
     }elseif (basename($request_url) == "addproduct.php"){
-        if (!empty($_POST)) {
-            $db->setSku($_POST['product_info']['product_sku']);
-            $db->setName($_POST['product_info']['product_name']);
-            $db->setPrice($_POST['product_info']['product_price']);
-            $db->setCategory($_POST['product_info']['product_type']);
-            $db->setAttrib($_POST['product_info']['product_attrib']);
+        if (isset($_POST['action'])){
+            $sku = $_POST['product_sku'];
+            $db->setSku($_POST['product_sku']);
+            echo $db->checkSku() ? "Valid" : "Invalid";
+        }else{
+            if (!empty($_POST)) {
+                $db->setSku($_POST['product_info']['product_sku']);
+                $db->setName($_POST['product_info']['product_name']);
+                $db->setPrice($_POST['product_info']['product_price']);
+                $db->setCategory($_POST['product_info']['product_type']);
+                $db->setAttrib($_POST['product_info']['product_attrib']);
 
-            $insert = $db->productInsert();
+                $insert = $db->productInsert();
+            }
         }
-
-        $products = $db->productList();
     }

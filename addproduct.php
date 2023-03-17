@@ -13,9 +13,9 @@ include  "./config/header.php"
                         <a href="#" class="ms-2 ">
                             <div class="btn btn-success class_product_add"><i class="fas fa-save"></i> &nbsp;Save</div>
                         </a>
-
-                        <div class="btn btn-danger ms-2" onclick="pageListing()"><i class="fas fa-window-close"></i> &nbsp;Cancel</div>
-
+                        <button class="btn btn-danger ms-2" onclick="pageListing()">
+                            <i class="fas fa-window-close"></i> &nbsp;Cancel
+                        </button>
                     </nav>
                 </div>
             </header>
@@ -50,10 +50,10 @@ include  "./config/header.php"
                             <label for="productType" class="col-sm-2 col-form-label">Type Switcher</label>
                             <div class="col-sm-6">
                                 <select class="form-select col-sm-2" id="productType" required>
-                                    <option selected value="">Choose product type...</option>
-                                    <option value="DVD" id="DVD">Disk</option>
-                                    <option value="Book" id="Book">Book</option>
-                                    <option value="Furniture" id="Furniture">Furniture</option>
+                                    <option selected disabled value="">Choose product type...</option>
+                                    <option value="DVD">DVD</option>
+                                    <option value="Book">Book</option>
+                                    <option value="Furniture">Furniture</option>
                                 </select>
                                 <div id="err_productType" class="text-danger text-sm-end small"></div>
                             </div>

@@ -13,8 +13,28 @@ $(document).ready(function () {
             $("#err_sku").html(err_sku_len);
             return false;
         }else if (val_sku.length >= 3) {
-            $("#err_sku").html("");
-            return true;
+            let valid = "";
+            $.ajax({
+                url: './Controllers/Base.php',
+                type: 'POST',
+                async: false,
+                data: { action: "sku_valid", product_sku: val_sku },
+                success: function(response){
+                    valid = response;
+                }
+            });
+            if (valid == 'Valid'){
+                $("#err_sku").addClass("text-success");
+                $("#err_sku").removeClass("text-danger");
+                $("#err_sku").html('SKU is valid');
+                return true;
+            }else {
+                $("#err_sku").addClass("text-danger");
+                $("#err_sku").removeClass("text-success");
+                $("#err_sku").html('SKU is already in use, Use a different one');
+                return false;
+            }
+            //return true;
         }
     }
 
@@ -142,7 +162,6 @@ $(document).ready(function () {
     $("#productType").change(function () {
         validateCategory();
     });
-
 
 
     $('.class_product_add').click(function(){
