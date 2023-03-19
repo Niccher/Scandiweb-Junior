@@ -1,5 +1,6 @@
 <?php
-include  "./config/header.php"
+include  "./config/header.php";
+include  "./config/config.php";
 ?>
     <body>
         <div class="container py-3">
@@ -9,7 +10,7 @@ include  "./config/header.php"
                         <span class="fs-4">Product List</span>
                     </a>
                     <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-                        <a href="addproduct.php" class="ms-2">
+                        <a href="add-product/" class="ms-2">
                             <div class="btn btn-primary"><i class="fas fa-plus"></i> &nbsp;Add</div>
                         </a>
                         <button class="ms-2 btn btn-warning" id="delete-product-btn">
@@ -28,7 +29,7 @@ include  "./config/header.php"
 
             <!--footer -->
             <?php
-            include  "./config/footer.php"
+            include  "./config/footer.php";
             ?>
         </div>
 
@@ -62,7 +63,7 @@ include  "./config/header.php"
 
             function getList(){
                 $.ajax({
-                    url: './Controllers/Base.php',
+                    url: './controller/home.php',
                     type: 'POST',
                     data: { action: "get_products" },
                     success: function(response){
@@ -76,7 +77,7 @@ include  "./config/header.php"
 
             function delProducts(product_ids){
                 $.ajax({
-                    url: './Controllers/Base.php',
+                    url: './controller/home.php',
                     type: 'POST',
                     data: { action: "del_products", prod_ids: product_ids },
                     success: function(response){
@@ -92,4 +93,4 @@ include  "./config/header.php"
 
     </body>
 
-</htm
+</html>

@@ -1,6 +1,6 @@
 <?php
 
-include './../Models/Database.php';
+include './../model/Database.php';
 
     $request_url=( $_SERVER["HTTP_REFERER"]);
 
@@ -18,7 +18,7 @@ include './../Models/Database.php';
                 $db->productDelete();
             }
         }
-    }elseif (basename($request_url) == "addproduct.php"){
+    }elseif (basename($request_url) == "add-product"){
         if (isset($_POST['action'])){
             $sku = $_POST['product_sku'];
             $db->setSku($_POST['product_sku']);
@@ -31,7 +31,7 @@ include './../Models/Database.php';
                 $db->setCategory($_POST['product_info']['product_type']);
                 $db->setAttrib($_POST['product_info']['product_attrib']);
 
-                $insert = $db->productInsert();
+                $db->productInsert();
             }
         }
     }

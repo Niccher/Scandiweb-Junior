@@ -6,7 +6,7 @@ class Database{
 
     private $connection;
 
-    private $sku ;
+    private $sku ; //Product attributes
     private $name;
     private $price ;
     private $category ;
@@ -84,6 +84,9 @@ class Database{
         $this->products = $products;
     }
 
+    /*
+     * Initialize the database connection within the class constructor
+     */
     public function __construct()
     {
         try{
@@ -99,6 +102,9 @@ class Database{
         }
     }
 
+    /*
+     * Function to fetch all products from the database
+     */
     public function productList()
     {
         $sql = "SELECT * FROM tbl_Products ORDER BY prod_count DESC";
@@ -115,19 +121,14 @@ class Database{
                 $this->setCategory($single_product[4]);
                 $this->setAttrib($single_product[5]);
 
-                $prod_icon = "";
                 $prod_prefix = "";
                 if($this->getCategory() ==  "DVD"){
-                    $prod_icon = "<i class='fas fa-compact-disc text-muted'></i>";
                     $prod_prefix = "Size";
                 }else if($this->getCategory() ==  "Book"){
-                    $prod_icon = "<i class='fas fa-book text-muted'></i>";
                     $prod_prefix = "Weight";
                 }else if($this->getCategory() ==  "Furniture"){
-                    $prod_icon = "<i class='fas fa-chair text-muted'></i>";
                     $prod_prefix = "Dimensions";
                 }
-                $prods_category = '<li class="fw-bold">'.$prod_icon.'&nbsp;&nbsp;'.$this->getCategory().'</li>';
 
                 $product_ui .= '
                 <div class="col-md-3 col-sm-6">
@@ -138,7 +139,7 @@ class Database{
                             </div>
                             <ul class="list-unstyled mt-3 mb-4">
                                 <li><i class="fas fa-tag text-muted"></i>&nbsp;&nbsp;'.$this->getSku().'</li>
-                                <li class="fs-4"><i class="fas fa-tags text-muted"></i>&nbsp;&nbsp;'.$this->getName().'</li>
+                                <li class="fs-4">'.$this->getName().'</li>
                                 <li>'.$this->getPrice().'&nbsp;<i class="fas fa-dollar-sign text-muted"></i></li>
                                 <li class="fw-bold">'.$prod_prefix.':&nbsp;&nbsp;'.$this->getAttrib().'</li>
                             </ul>
@@ -153,6 +154,9 @@ class Database{
         }
     }
 
+    /*
+     * Add a new product to the database.
+     */
     public function productInsert()
     {
         $str_sku        = filter_var($this->getSku(), FILTER_SANITIZE_STRING);
@@ -173,16 +177,22 @@ class Database{
         }
     }
 
+    /*
+     * Delete a product from the database.
+     */
     public function productDelete()
     {
-        //$multiple_skus = $this->getSkuDelete();
-        foreach ($this->getSkuDelete() as $product_sku){
+        $multiple_skus = $this->getSkuDelete();
+        foreach ($multiple_skus as $product_sku){
             $str_sku    = filter_var($product_sku, FILTER_SANITIZE_STRING);
             $sql        = "DELETE FROM tbl_Products WHERE prod_sku = '".$str_sku."' ";
             $result     = mysqli_query($this->connection , $sql);
         }
     }
 
+    /*
+     * Function to check if SKU typed exists in the product_list table.
+     */
     public function checkSku()
     {
         $str_sku        = filter_var($this->getSku(), FILTER_SANITIZE_STRING);

@@ -1,7 +1,8 @@
 <?php
-include  "./config/header.php"
+include  "./../config/header.php";
 ?>
 
+    <link href="./../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <body>
         <div class="container py-3">
             <header>
@@ -26,22 +27,21 @@ include  "./config/header.php"
                         <div class="row mb-3">
                             <label for="sku" class="col-sm-2 col-form-label">SKU &nbsp;<i class="fas fa-tag text-muted"></i></label>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" id="sku" required minlength="3" placeholder="Enter Product SKU here">
+                                <input type="text" class="form-control" id="sku" required minlength="3" placeholder="Product SKU">
                                 <div id="err_sku" class="text-danger text-end small"></div>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="name" class="col-sm-2 col-form-label">Name &nbsp;<i class="fas fa-tag text-muted"></i></label>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" id="name" required minlength="3" placeholder="Enter Product Name here">
+                                <input type="text" class="form-control" id="name" required minlength="3" placeholder="Product Name">
                                 <div id="err_name" class="text-danger text-end small"></div>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="price" class="col-sm-2 col-form-label">Price &nbsp;<i class="fas fa-dollar-sign text-muted"></i></label>
                             <div class="col-sm-6">
-                                <!--<input type="text" class="form-control" id="price" required minlength="1" placeholder="Enter Product Price here (Numbers only)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')"> -->
-                                <input type="text" class="form-control" id="price" required minlength="1" placeholder="Enter Product Price here (Numbers only)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/[^0-9\.]/g, '')">
+                                <input type="text" class="form-control" id="price" required minlength="1" maxlength="4" placeholder="Product Price (Numbers only)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/[^0-9\.]/g, '')">
                                 <div id="err_price" class="text-danger text-end small"></div>
                             </div>
                         </div>
@@ -64,7 +64,7 @@ include  "./config/header.php"
                             <div class="row mb-3">
                                 <label for="size" class="col-sm-3 col-form-label">Size (MB) &nbsp;<i class="fas fa-database text-muted"></i></label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="size" placeholder="Disk Size (Numbers only)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/[^0-9\.]/g, '')">
+                                    <input type="text" class="form-control" id="size" maxlength="4" placeholder="Disk Size (Numbers only)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/[^0-9\.]/g, '')">
                                     <div id="err_size" class="text-danger text-end small"></div>
                                 </div>
                             </div>
@@ -75,7 +75,7 @@ include  "./config/header.php"
                             <div class="row mb-3">
                                 <label for="weight" class="col-sm-3 col-form-label">Weight (KG)&nbsp;<i class="fas fa-weight-hanging text-muted"></i></label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="weight" placeholder="Book weight (Numbers only)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/[^0-9\.]/g, '')">
+                                    <input type="text" class="form-control" id="weight" maxlength="4" placeholder="Book weight (Numbers only)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/[^0-9\.]/g, '')">
                                     <div id="err_weight" class="text-danger text-end small"></div>
                                 </div>
                             </div>
@@ -84,23 +84,23 @@ include  "./config/header.php"
                         <div class="card class-furniture d-none col-sm-8">
                             <label class="my-2">Furniture Information</label>
                             <div class="row mb-3">
-                                <label for="length" class="col-sm-3 col-form-label">Length (CM)&nbsp;<i class="fas fa-ruler-combined text-muted"></i></label>
+                                <label for="length" class="col-sm-3 col-form-label">Length (CM)&nbsp;<i class="fas fa-ruler text-muted"></i></label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="length" placeholder="Furniture length (Numbers only)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/[^0-9\.]/g, '')">
+                                    <input type="text" class="form-control" id="length" maxlength="4" placeholder="Furniture length (Numbers only)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/[^0-9\.]/g, '')">
                                     <div id="err_length" class="text-danger text-end small"></div>
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="width" class="col-sm-3 col-form-label">Width (CM)&nbsp;<i class="fas fa-ruler-combined text-muted"></i></label>
+                                <label for="width" class="col-sm-3 col-form-label">Width (CM)&nbsp;<i class="fas fa-ruler-horizontal text-muted"></i></label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="width" placeholder="Furniture width (Numbers only)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/[^0-9\.]/g, '')">
+                                    <input type="text" class="form-control" id="width" maxlength="4" placeholder="Furniture width (Numbers only)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/[^0-9\.]/g, '')">
                                     <div id="err_width" class="text-danger text-end small"></div>
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="height" class="col-sm-3 col-form-label">Height (CM) &nbsp;<i class="fas fa-ruler-combined text-muted"></i></label>
+                                <label for="height" class="col-sm-3 col-form-label">Height (CM) &nbsp;<i class="fas fa-ruler-vertical text-muted"></i></label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="height" placeholder="Furniture height (Numbers only)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/[^0-9\.]/g, '')">
+                                    <input type="text" class="form-control" id="height" maxlength="4" placeholder="Furniture height (Numbers only)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/[^0-9\.]/g, '')">
                                     <div id="err_height" class="text-danger text-end small"></div>
                                 </div>
                             </div>
@@ -113,14 +113,14 @@ include  "./config/header.php"
 
             <!--footer -->
             <?php
-            include  "./config/footer.php"
+            include  "./config/footer.php";
             ?>
 
 
         </div>
-        <script src="./assets/js/bootstrap.bundle.min.js"></script>
-        <script src="./assets/js/jquery3.6.4.js"></script>
-        <script src="./assets/js/validator.js"></script>
+        <script src="./../assets/js/bootstrap.bundle.min.js"></script>
+        <script src="./../assets/js/jquery3.6.4.js"></script>
+        <script src="./../assets/js/validator.js"></script>
 
         <script>
             $(document).ready(function(){
@@ -157,11 +157,10 @@ include  "./config/header.php"
                     $("#err_weight").html("");
                     $("#err_height").html("");
                 });
-
             });
 
             function pageListing() {
-                window.location.href = "index.php";
+                window.location.href = "./../index.php";
             }
 
         </script>
