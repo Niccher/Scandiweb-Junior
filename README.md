@@ -6,7 +6,6 @@ This is a simple web-app that is meant to act as shop, It allows a user to add a
 ## _Pages available_
 - index.php   -> Lists the available products.
 - add-product -> Allows a person to add a product.
-- Dillinger requires [index.php](https://scandiwebjunior.chegecache.co.ke/) v10+ to run.
 
 ## Links
 
