@@ -196,7 +196,7 @@ $(document).ready(function () {
             }
             if (val_category == "Furniture") {
                 val_product_attrib = {
-                    product_attrib: val_furn_length + 'x' + val_furn_width + 'x' + val_furn_height
+                    product_attrib: val_furn_height + 'x' + val_furn_width + 'x' + val_furn_length
                 }
             }
 

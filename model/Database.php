@@ -206,7 +206,6 @@ class Database{
         } else {
             return true;
         }
-
     }
 }
 

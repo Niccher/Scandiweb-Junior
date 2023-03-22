@@ -113,7 +113,7 @@ include  "./../config/header.php";
 
             <!--footer -->
             <?php
-            include  "./config/footer.php";
+            include  "./../config/footer.php";
             ?>
 
 

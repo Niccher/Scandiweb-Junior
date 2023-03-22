@@ -2,7 +2,7 @@
 
 include './../model/Database.php';
 
-    $request_url=( $_SERVER["HTTP_REFERER"]);
+    $request_url = $_SERVER["HTTP_REFERER"];
 
     if (basename($request_url) == "index.php" || strcmp( basename($request_url), URL_ENDPOINT )){
         if($_POST['action'] == 'get_products'){
@@ -18,11 +18,15 @@ include './../model/Database.php';
                 $db->productDelete();
             }
         }
-    }elseif (basename($request_url) == "add-product"){
+    }
+    if (basename($request_url) == "add-product"){
         if (isset($_POST['action'])){
-            $sku = $_POST['product_sku'];
-            $db->setSku($_POST['product_sku']);
-            echo $db->checkSku() ? "Valid" : "Invalid";
+            if($_POST['action'] == 'sku_valid'){
+                $sku = $_POST['product_sku'];
+                $db->setSku($_POST['product_sku']);
+                echo $db->checkSku() ? "Valid" : "Invalid";
+            }
+
         }else{
             if (!empty($_POST)) {
                 $db->setSku($_POST['product_info']['product_sku']);

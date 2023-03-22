@@ -10,12 +10,18 @@ include  "./config/config.php";
                         <span class="fs-4">Product List</span>
                     </a>
                     <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-                        <a href="add-product/" class="ms-2">
-                            <div class="btn btn-primary"><i class="fas fa-plus"></i> &nbsp;Add</div>
-                        </a>
-                        <button class="ms-2 btn btn-warning" id="delete-product-btn">
-                            <i class="fas fa-trash"></i> &nbsp; Mass Delete
-                        </button>
+                        <li class="btn btn-primary">
+                            <a class="nav-link text-white" href="add-product/">
+                                <i class="fas fa-plus"></i>
+                                ADD
+                            </a>
+                        </li>
+                        <li class="btn btn-warning ms-2">
+                            <a class="nav-link text-dark" href="#" id="delete-product-btn">
+                                <i class="fas fa-trash"></i>
+                                MASS DELETE
+                            </a>
+                        </li>
                         <small class="btn-link btn-sm text-danger fst-italic del_error"></small>
                     </nav>
                 </div>
