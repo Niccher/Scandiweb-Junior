@@ -8,4 +8,4 @@
 
     define("DB_DATABASE_NAME", "scandiweb_junior");
 
-    define("URL_ENDPOINT", "https://scandiwebjunior.chegecache.co.ke");
+    define("URL_ENDPOINT", "https://scandiwebjunior.chegecache.co.ke/");

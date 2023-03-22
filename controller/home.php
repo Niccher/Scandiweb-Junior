@@ -4,7 +4,7 @@ include './../model/Database.php';
 
     $request_url=( $_SERVER["HTTP_REFERER"]);
 
-    if (basename($request_url) == "index.php" || basename($request_url) == ""){
+    if (basename($request_url) == "index.php" || strcmp( basename($request_url), URL_ENDPOINT )){
         if($_POST['action'] == 'get_products'){
             $products = $db->productList();
             $db->setProducts($products);
