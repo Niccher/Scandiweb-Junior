@@ -15,7 +15,7 @@ $(document).ready(function () {
         }else if (val_sku.length >= 3) {
             let valid = "";
             $.ajax({
-                url: './../controller/home.php',
+                url: './../controller/Home.php',
                 type: 'POST',
                 async: false,
                 data: { action: "sku_valid", product_sku: val_sku },
@@ -209,7 +209,7 @@ $(document).ready(function () {
             product_info = Object.assign({}, product_data, val_product_attrib);
 
             $.ajax({
-                url: './../controller/home.php',
+                url: './../controller/Home.php',
                 type: 'POST',
                 data: { product_info },
                 success: function(response){

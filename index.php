@@ -10,18 +10,18 @@ include  "./config/config.php";
                         <span class="fs-4">Product List</span>
                     </a>
                     <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-                        <li class="btn btn-primary">
-                            <a class="nav-link text-white" href="add-product/">
+                        <div class="">
+                            <a class="btn btn-primary text-white" href="add-product/">
                                 <i class="fas fa-plus"></i>
                                 ADD
                             </a>
-                        </li>
-                        <li class="btn btn-warning ms-2">
-                            <a class="nav-link text-dark" href="#" id="delete-product-btn">
+                        </div>
+                        <div class="ms-2">
+                            <a class="btn btn-warning text-dark" href="#" id="delete-product-btn">
                                 <i class="fas fa-trash"></i>
                                 MASS DELETE
                             </a>
-                        </li>
+                        </div>
                         <small class="btn-link btn-sm text-danger fst-italic del_error"></small>
                     </nav>
                 </div>
@@ -69,7 +69,7 @@ include  "./config/config.php";
 
             function getList(){
                 $.ajax({
-                    url: './controller/home.php',
+                    url: './controller/Home.php',
                     type: 'POST',
                     data: { action: "get_products" },
                     success: function(response){
@@ -83,7 +83,7 @@ include  "./config/config.php";
 
             function delProducts(product_ids){
                 $.ajax({
-                    url: './controller/home.php',
+                    url: './controller/Home.php',
                     type: 'POST',
                     data: { action: "del_products", prod_ids: product_ids },
                     success: function(response){

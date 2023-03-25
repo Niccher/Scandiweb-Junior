@@ -121,14 +121,7 @@ class Database{
                 $this->setCategory($single_product[4]);
                 $this->setAttrib($single_product[5]);
 
-                $prod_prefix = "";
-                if($this->getCategory() ==  "DVD"){
-                    $prod_prefix = "Size";
-                }else if($this->getCategory() ==  "Book"){
-                    $prod_prefix = "Weight";
-                }else if($this->getCategory() ==  "Furniture"){
-                    $prod_prefix = "Dimensions";
-                }
+                $prod_prefix = ($this->getCategory()=="DVD" ? "DVD" : ($this->getCategory()=="Book" ? "Weight" : ($this->getCategory()=="Furniture" ? "Dimensions" : "")) );
 
                 $product_ui .= '
                 <div class="col-md-3 col-sm-6">
