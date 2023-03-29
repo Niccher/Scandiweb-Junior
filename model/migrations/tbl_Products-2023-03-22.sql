@@ -33,7 +33,7 @@ CREATE TABLE `tbl_Products` (
                                 `prod_name` varchar(64) NOT NULL,
                                 `prod_price` varchar(5) NOT NULL,
                                 `prod_category` varchar(16) NOT NULL,
-                                `product_attrib` varchar(16) NOT NULL,
+                                `product_attrib` varchar(64) NOT NULL,
                                 `product_created_at` timestamp(6) NOT NULL DEFAULT current_timestamp(6)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

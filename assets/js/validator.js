@@ -1,3 +1,55 @@
+class Products{
+    constructor(...args){
+        this.attr = args;
+    }
+}
+
+class Dvd extends Products{
+    constructor(...args) {
+        super(...args);
+        this.attrs = args;
+    }
+
+    getAttr() {
+        if (this.attrs == "" || this.attrs == undefined){
+            return ""
+        }else{
+            return "Size: " + this.attrs + " MB";
+        }
+    }
+}
+
+class Book extends Products{
+    constructor(...args) {
+        super(...args);
+        this.attrs = args;
+    }
+
+    getAttr() {
+        if (this.attrs == "" || this.attrs == undefined){
+            return ""
+        }else{
+            return "Weight: " + this.attrs + " KG";
+        }
+    }
+}
+
+class Furniture extends Products{
+    constructor(...args) {
+        super(...args)
+        this.attrs = args;
+    }
+
+    getAttr(){
+        var arr = this.attrs
+        if (arr[0] == "" || arr[1] == "" || arr[2] == "" || arr[0] == undefined || arr[1] == undefined || arr[2] == undefined ){
+            return ""
+        }else{
+            return "Dimension: " + this.attrs[0]  + " x " + this.attrs[1] + " x " + this.attrs[2]
+        }
+    }
+}
+
 $(document).ready(function () {
 
     function validateSku() {
@@ -74,77 +126,41 @@ $(document).ready(function () {
         let val_category = $( "#productType" ).val();
         let err_cat_len = "";
 
-        if (val_category.length >= 2) {
-            $("#err_productType").html("");
-            return true;
-        }else {
+        if (val_category === null){
             err_cat_len = "A valid category is needed"
             $("#err_productType").html(err_cat_len);
             return false;
+        }else if (val_category.length >= 2) {
+            $("#err_productType").html("");
+            return true;
         }
     }
 
     function validateSubCategory() {
         let val_category = $( "#productType" ).val();
 
-        let val_book_weight = $( "#weight" ).val();
-        let val_dvd_size = $( "#size" ).val();
-        let val_furn_length = $( "#length" ).val();
-        let val_furn_width = $( "#width" ).val();
-        let val_furn_height = $( "#height" ).val();
-
-        if(val_category.length == ""){
+        if(val_category === null){
             return false
+        }else {
+            return true
         }
+    }
 
-        if (val_category == "DVD") {
-            if (val_dvd_size.length == ""){
-                $("#err_size").html("DVD size is needed");
-                $("#size").focus();
-                return false
-            }else {
-                $("#err_size").html("");
-                return true
+    function isInputsEmpty() {
+        var isEmpty = 0;
+        $('#product_form input, #product_form select').each(
+            function(){
+                if (this.value == ""){
+                    //console.log('Input Id: ' + this.id + ' is null.');
+                    isEmpty = isEmpty + 1;
+                    this.focus()
+                    $("#err_" + this.id).html("Value is needed");
+                }else{
+                    $("#err_" + this.id).html("");
+                }
             }
-        }
-
-        if (val_category == "Book") {
-            if (val_book_weight.length == ""){
-                $("#err_weight").html("Book weight is needed");
-                $("#weight").focus();
-                return false
-            }else {
-                $("#err_weight").html("");
-                return true
-            }
-        }
-
-        if (val_category == "Furniture" ) {
-            if (val_furn_length.length == ""){
-                $("#err_length").html("Furniture length is needed");
-                $("#err_width").html("");
-                $("#err_height").html("");
-                $("#length").focus();
-                return false
-            }else if (val_furn_width.length == ""){
-                $("#err_width").html("Furniture width is needed");
-                $("#err_length").html("");
-                $("#err_height").html("");
-                $("#width").focus();
-                return false
-            } else if (val_furn_height.length == ""){
-                $("#err_height").html("Furniture height is needed");
-                $("#err_length").html("");
-                $("#err_width").html("");
-                $("#height").focus();
-                return false
-            }else{
-                $("#err_length").html("");
-                $("#err_width").html("");
-                $("#err_height").html("");
-                return true;
-            }
-        }
+        );
+        return isEmpty;
     }
 
     $("#sku").keyup(function () {
@@ -177,45 +193,46 @@ $(document).ready(function () {
 
             let val_category = $( "#productType" ).val();
 
-            let val_book_weight = $( "#weight" ).val();
-            let val_dvd_size = $( "#size" ).val();
-            let val_furn_length = $( "#length" ).val();
-            let val_furn_width = $( "#width" ).val();
-            let val_furn_height = $( "#height" ).val();
-            let val_product_attrib = {};
+            let val_book_weight     = $("#weight").val();
+            let val_dvd_size        = $("#size").val();
+            let val_furn_length     = $("#length").val();
+            let val_furn_width      = $("#width").val();
+            let val_furn_height     = $("#height").val();
+            let val_product_attrib  = {};
 
-            if (val_category == "DVD") {
-                val_product_attrib = {
-                    product_attrib: val_dvd_size  + ' MB'
-                }
+            var book = new Book(val_book_weight);
+            var dvd = new Dvd(val_dvd_size);
+            var furn = new Furniture(val_furn_height,val_furn_width,val_furn_length);
+
+            val_product_attrib = {
+                product_attrib: book.getAttr() + dvd.getAttr() + furn.getAttr()
             }
-            if (val_category == "Book") {
-                val_product_attrib = {
-                    product_attrib: val_book_weight  + ' KG'
-                }
+            console.log(val_product_attrib);
+
+            let empty = isInputsEmpty()
+            if (empty > 0){
+                //console.log("An empty field is present " + empty)
+            }else {
+
+                sku = $("#sku").val();
+                name = $("#name").val();
+                price = $("#price").val();
+                cat = $("#productType").val();
+
+                product_data = {product_sku: sku, product_name: name, product_price: price, product_type: cat}
+                product_info = Object.assign({}, product_data, val_product_attrib);
+
+                $.ajax({
+                    url: './../controller/Home.php',
+                    type: 'POST',
+                    data: { product_info },
+                    success: function(response){
+                        window.location.replace("./../index.php");
+                    }
+                });
+
             }
-            if (val_category == "Furniture") {
-                val_product_attrib = {
-                    product_attrib: val_furn_height + 'x' + val_furn_width + 'x' + val_furn_length
-                }
-            }
 
-            sku = $("#sku").val();
-            name = $("#name").val();
-            price = $("#price").val();
-            cat = $( "#productType" ).val();
-
-            product_data = {product_sku: sku, product_name: name, product_price: price, product_type: cat}
-            product_info = Object.assign({}, product_data, val_product_attrib);
-
-            $.ajax({
-                url: './../controller/Home.php',
-                type: 'POST',
-                data: { product_info },
-                success: function(response){
-                    window.location.replace("./../index.php");
-                }
-            });
         }
 
     });

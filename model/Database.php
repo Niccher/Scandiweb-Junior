@@ -121,8 +121,6 @@ class Database{
                 $this->setCategory($single_product[4]);
                 $this->setAttrib($single_product[5]);
 
-                $prod_prefix = ($this->getCategory()=="DVD" ? "DVD" : ($this->getCategory()=="Book" ? "Weight" : ($this->getCategory()=="Furniture" ? "Dimensions" : "")) );
-
                 $product_ui .= '
                 <div class="col-md-3 col-sm-6">
                     <div class="card mb-3 rounded-3">
@@ -134,7 +132,7 @@ class Database{
                                 <li><i class="fas fa-tag text-muted"></i>&nbsp;&nbsp;'.$this->getSku().'</li>
                                 <li class="fs-4">'.$this->getName().'</li>
                                 <li>'.$this->getPrice().'&nbsp;<i class="fas fa-dollar-sign text-muted"></i></li>
-                                <li class="fw-bold">'.$prod_prefix.':&nbsp;&nbsp;'.$this->getAttrib().'</li>
+                                <li class="fw-bold">'.$this->getAttrib().'</li>
                             </ul>
                         </div>
                     </div>

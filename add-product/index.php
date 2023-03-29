@@ -23,7 +23,7 @@ include  "./../config/header.php";
 
             <main>
                 <div class="row mb-3 text-center">
-                    <form class="col-sm-12" id="product_form">
+                    <form class="col-sm-12 prod_form" id="product_form">
                         <div class="row mb-3">
                             <label for="sku" class="col-sm-2 col-form-label">SKU &nbsp;<i class="fas fa-tag text-muted"></i></label>
                             <div class="col-sm-6">
@@ -51,7 +51,7 @@ include  "./../config/header.php";
                             <div class="col-sm-6">
                                 <select class="form-select col-sm-2" id="productType" required>
                                     <option selected disabled value="">Choose product type...</option>
-                                    <option value="DVD">DVD</option>
+                                    <option value="Dvd">DVD</option>
                                     <option value="Book">Book</option>
                                     <option value="Furniture">Furniture</option>
                                 </select>
@@ -59,52 +59,7 @@ include  "./../config/header.php";
                             </div>
                         </div>
 
-                        <div class="card class-dvd d-none col-sm-8">
-                            <label class="my-2">DVD Information</label>
-                            <div class="row mb-3">
-                                <label for="size" class="col-sm-3 col-form-label">Size (MB) &nbsp;<i class="fas fa-database text-muted"></i></label>
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="size" maxlength="4" placeholder="Disk Size (Numbers only)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/[^0-9\.]/g, '')">
-                                    <div id="err_size" class="text-danger text-end small"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card class-book d-none col-sm-8">
-                            <label class="my-2">Book Information</label>
-                            <div class="row mb-3">
-                                <label for="weight" class="col-sm-3 col-form-label">Weight (KG)&nbsp;<i class="fas fa-weight-hanging text-muted"></i></label>
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="weight" maxlength="4" placeholder="Book weight (Numbers only)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/[^0-9\.]/g, '')">
-                                    <div id="err_weight" class="text-danger text-end small"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card class-furniture d-none col-sm-8">
-                            <label class="my-2">Furniture Information</label>
-                            <div class="row mb-3">
-                                <label for="length" class="col-sm-3 col-form-label">Length (CM)&nbsp;<i class="fas fa-ruler text-muted"></i></label>
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="length" maxlength="4" placeholder="Furniture length (Numbers only)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/[^0-9\.]/g, '')">
-                                    <div id="err_length" class="text-danger text-end small"></div>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="width" class="col-sm-3 col-form-label">Width (CM)&nbsp;<i class="fas fa-ruler-horizontal text-muted"></i></label>
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="width" maxlength="4" placeholder="Furniture width (Numbers only)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/[^0-9\.]/g, '')">
-                                    <div id="err_width" class="text-danger text-end small"></div>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="height" class="col-sm-3 col-form-label">Height (CM) &nbsp;<i class="fas fa-ruler-vertical text-muted"></i></label>
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="height" maxlength="4" placeholder="Furniture height (Numbers only)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/[^0-9\.]/g, '')">
-                                    <div id="err_height" class="text-danger text-end small"></div>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="ui_category_here"></div>
 
                     </form>
 
@@ -128,35 +83,16 @@ include  "./../config/header.php";
                 $("#productType").change(function () {
                     var ui_class = this.value;
 
-                    if (ui_class == 'DVD'){
-                        $('.class-dvd').removeClass("d-none");
-                        $('.class-book').addClass("d-none");
-                        $('.class-furniture').addClass("d-none");
-                    }else if (ui_class == 'Book'){
-                        $('.class-dvd').addClass("d-none");
-                        $('.class-book').removeClass("d-none");
-                        $('.class-furniture').addClass("d-none");
-                    }else if (ui_class == 'Furniture'){
-                        $('.class-dvd').addClass("d-none");
-                        $('.class-book').addClass("d-none");
-                        $('.class-furniture').removeClass("d-none");
-                    }
-                    else {
-                        $('.class-dvd').addClass("d-none");
-                        $('.class-book').addClass("d-none");
-                        $('.class-furniture').addClass("d-none");
-                    }
-
-                    $("#weight" ).val('');
-                    $("#size" ).val('');
-                    $("#length" ).val('');
-                    $("#width" ).val('');
-                    $("#height" ).val('');
-
-                    $("#err_size").html("");
-                    $("#err_weight").html("");
-                    $("#err_height").html("");
+                    $.ajax({
+                        url: './../views/' + ui_class + '.php',
+                        type: 'POST',
+                        data: { category: ui_class },
+                        success: function(response){
+                            $('.ui_category_here').html(response)
+                        }
+                    })
                 });
+
             });
 
             function pageListing() {
